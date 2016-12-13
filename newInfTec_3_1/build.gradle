@@ -1,0 +1,22 @@
+group 'com.github.modelflat'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/args4j/args4j
+    compile group: 'args4j', name: 'args4j', version: '2.33'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
