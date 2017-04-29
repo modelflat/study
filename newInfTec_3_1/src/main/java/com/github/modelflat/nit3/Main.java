@@ -57,7 +57,11 @@ public class Main {
         block2.saveImage(MPEG_TEST_IMAGES_OUTPUT_DIR + "source2");
 
         System.out.println("====== JPEG ======");
-        block1.print("исходная матрица");
+        try (PrintStream s = open("source.3d")) {
+            block1.print("исходная матрица")
+                    .print(s);
+            splot("source.3d");
+        }
 
         if (settings.hasAutoJPEGQ()) {
             for (int q : qSet) {
